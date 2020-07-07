@@ -65,6 +65,12 @@ class GregorianDate(PolyDate):
         return self._n
     def __str__(self):
         return "GregorianDate(" + str(self._year) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _addition(self,num):
+        # num must be an integer
+        return GregorianDate(self._n + num)
+    def _subtract_int(self,num):
+        # num must be an integer
+        return GregorianDate(self._n - num)
     @staticmethod
     def is_leap_year(year):
         # year must be an integer
@@ -172,4 +178,3 @@ class GregorianDate(PolyDate):
         self._year = year
         self._month = month + 1
         self._day = n_in_month + 1
-    

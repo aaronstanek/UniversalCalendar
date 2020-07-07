@@ -100,7 +100,7 @@ class GregorianDate(PolyDate):
         # year is ok no matter what
         if year == 0:
             raise ValueError("The Gregorian Calendar does not have a year 0, use -1 instead")
-        leap = GregorianDate.is_leap_year(year)
+        leap = self.is_leap_year(year)
         if month > 12 or month < 1:
             raise ValueError("GregorianDate month must be between 1 and 12")
         if leap:
@@ -111,7 +111,7 @@ class GregorianDate(PolyDate):
             raise ValueError("GregorianDate day must be between 1 and the maximum number of days in the month")
         # it is validated
     def _set_n(self):
-        leap = GregorianDate.is_leap_year(self._year)
+        leap = self.is_leap_year(self._year)
         # each block is 400 years
         y = self._year
         if y < 1:

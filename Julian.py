@@ -85,7 +85,7 @@ class JulianDate(PolyDate):
     def validate(year,month,day):
         if year == 0:
             raise ValueError("The Julian Calendar does not have a year 0, use -1 instead")
-        leap = JulianDate.is_leap_year(year)
+        leap = self.is_leap_year(year)
         if month < 1 or month > 12:
             raise ValueError("JulianDate month must be between 1 and 12")
         if leap:
@@ -96,7 +96,7 @@ class JulianDate(PolyDate):
             raise ValueError("JulianDate day must be between 1 and the maximum number of days in the month")
         # it is validated
     def _set_n(self):
-        leap = JulianDate.is_leap_year(self._year)
+        leap = self.is_leap_year(self._year)
         # each block is 4 years (1461 days)
         y = self._year
         if y <= -1:

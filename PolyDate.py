@@ -43,11 +43,7 @@ class PolyDate(object):
 # .universal()
 # .number()
 # str()
-# + int
-# int +
-# - int
-# - PolyDate
-# += int
-# -= int
+# _addition
+# _subtract_int
 
 # child classes may define additional methods

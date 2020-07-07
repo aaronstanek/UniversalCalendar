@@ -52,6 +52,16 @@ class MayanDate(PolyDate):
     def _subtract_int(self,num):
         # num must be an integer
         return MayanDate(self._n - num)
+    def baktun(self):
+        return self._baktun
+    def katun(self):
+        return self._katun
+    def tun(self):
+        return self._tun
+    def winal(self):
+        return self._winal
+    def kin(self):
+        return self._kin
     @staticmethod
     def validate_long_count(baktun,katun,tun,winal,kin):
         if baktun > 19:

@@ -16,8 +16,14 @@ block_length = DurationSum([
     366, 365, 365, 365
 ])
 
+day_names = [
+    "Thursday", "Friday", "Saturday", "Sunday",
+    "Monday", "Tuesday", "Wednesday"
+]
+
 class JulianDate(PolyDate):
     # _n is the Julian date number (not Julian day)
+    # this is universal + 2
     # _year is the standard Julian year number CE/BCE
     # there is no year zero
     # _month is an int holding the month
@@ -34,11 +40,12 @@ class JulianDate(PolyDate):
         # [PolyDate] -> a PolyDate to build from
         if len(args) == 1:
             if type(args[0]) == int:
+                # Julian Date number
                 self._n = args[0]
                 self._set_ymd()
                 return
             if isinstance(args[0],PolyDate):
-                self._n = args[0].universal()._n
+                self._n = args[0].universal()._n + 2
                 self._set_ymd()
                 return
             raise ValueError("JulianDate can only be constructed from integers or PolyDate instances")
@@ -53,6 +60,20 @@ class JulianDate(PolyDate):
             self._set_n()
             return
         raise ValueError("JulianDate constructor was expecting either 1 or 3 arguments")
+    def universal(self):
+        return UniversalDate(self._n - 2)
+    def number(self):
+        return self._n
+    def __str__(self):
+        return "JulianDate(" + str(self._year) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _addition(self,num):
+        # num must be an integer
+        return JulianDate(self._n + num)
+    def _subtract_int(self,num):
+        # num must be an integer
+        return JulianDate(self._n - num)
+    def day_of_week(self):
+        return day_names[self._n % 7]
     @staticmethod
     def is_leap_year(year):
         # year should be an integer

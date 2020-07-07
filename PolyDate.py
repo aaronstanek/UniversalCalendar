@@ -40,8 +40,8 @@ class PolyDate(object):
 
 # all child classes of PolyDate must have the following:
 
-# lower_bound (static)
-# upper_bound (static)
+# lower_bound (static variable)
+# upper_bound (static variable)
 # .universal()
 # .number()
 # str()

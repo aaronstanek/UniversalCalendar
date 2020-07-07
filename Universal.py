@@ -13,6 +13,8 @@ class UniversalDate(PolyDate):
             self._n = other_universal._n
             return
         raise TypeError("UniversalDate can only be constructed from an integer or PolyDate instance")
+    lower_bound = None
+    upper_bound = None
     def universal(self):
         return self
     def number(self):

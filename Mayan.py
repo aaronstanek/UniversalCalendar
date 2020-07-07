@@ -32,12 +32,8 @@ class MayanDate(PolyDate):
             self._set_n()
             return
         raise ValueError("MayanDate constructor was expecting either 1 or 5 arguments")
-    @staticmethod
-    def lower_bound():
-        return UniversalDate(-1136777)
-    @staticmethod
-    def upper_bound():
-        return UniversalDate(1743222)
+    lower_bound = UniversalDate(-1136777)
+    upper_bound = UniversalDate(1743222)
     def universal(self):
         return UniversalDate(self._n - 1136777)
     def number(self):

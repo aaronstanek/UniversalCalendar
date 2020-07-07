@@ -15,6 +15,8 @@ class UniversalDate(PolyDate):
         raise TypeError("UniversalDate can only be constructed from an integer or PolyDate instance")
     def universal(self):
         return self
+    def number(self):
+        return self._n
     def __str__(self):
         return "UniversalDate(" + str(self._n) + ")"
     def _addition(self,num):

@@ -17,6 +17,7 @@ class PolyDate(object):
 # all child classes of PolyDate must have the following:
 
 # .universal()
+# .number()
 # str()
 # + int
 # int +

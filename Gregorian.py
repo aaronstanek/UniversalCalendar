@@ -61,6 +61,8 @@ class GregorianDate(PolyDate):
         raise ValueError("GregorianDate constructor was expecting either 1 or 3 arguments")
     def universal(self):
         return UniversalDate(self._n)
+    def number(self):
+        return self._n
     def __str__(self):
         return "GregorianDate(" + str(self._year) + "," + str(self._month) + "," + str(self._day) + ")"
     @staticmethod
@@ -170,3 +172,4 @@ class GregorianDate(PolyDate):
         self._year = year
         self._month = month + 1
         self._day = n_in_month + 1
+    

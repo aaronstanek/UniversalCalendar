@@ -24,6 +24,11 @@ century_length = DurationSum([
     36525, 36524, 36524, 36524
 ])
 
+day_names = [
+    "Saturday", "Sunday", "Monday", "Tuesday",
+    "Wednesday", "Thursday", "Friday"
+]
+
 class GregorianDate(PolyDate):
     # _n is the Gregorian date number
     # it also happens to be the universal date number
@@ -71,6 +76,8 @@ class GregorianDate(PolyDate):
     def _subtract_int(self,num):
         # num must be an integer
         return GregorianDate(self._n - num)
+    def day_of_week(self):
+        return day_names[self._n % 7]
     @staticmethod
     def is_leap_year(year):
         # year must be an integer

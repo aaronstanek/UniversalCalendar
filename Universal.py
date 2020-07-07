@@ -2,7 +2,7 @@ from .PolyDate import PolyDate
 
 class UniversalDate(PolyDate):
     # _n is the universal date number
-    # universal date zero is 1 Jan of the year 1
+    # universal date zero is 1 Jan of the year -1
     # in the proleptic Gregorian system
     def __init__(self,other):
         if type(other) == int:

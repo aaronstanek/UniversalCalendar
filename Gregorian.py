@@ -64,6 +64,12 @@ class GregorianDate(PolyDate):
             self._set_n()
             return
         raise ValueError("GregorianDate constructor was expecting either 1 or 3 arguments")
+    @staticmethod
+    def lower_bound():
+        return None
+    @staticmethod
+    def upper_bound():
+        return None
     def universal(self):
         return UniversalDate(self._n)
     def number(self):

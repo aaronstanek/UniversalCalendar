@@ -76,6 +76,12 @@ class GregorianDate(PolyDate):
     def _subtract_int(self,num):
         # num must be an integer
         return GregorianDate(self._n - num)
+    def year(self):
+        return self._year
+    def month(self):
+        return self._month
+    def day(self):
+        return self._day
     def day_of_week(self):
         return day_names[self._n % 7]
     @staticmethod

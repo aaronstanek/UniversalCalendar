@@ -1,6 +1,20 @@
 from .PolyDate import PolyDate
 from .Universal import UniversalDate
 
+tzolkin_days = [
+    "Imix", "Ikʼ", "Akʼbʼal", "Kʼan", "Chikchan",
+    "Kimi", "Manikʼ", "Lamat", "Muluk", "Ok",
+    "Chuwen", "Ebʼ", "Bʼen", "Ix", "Men",
+    "Kibʼ", "Kabʼan", "Etzʼnabʼ", "Kawak", "Ajaw"
+]
+
+haab_months = [
+    "Pop", "Woʼ", "Sip", "Sotzʼ", "Sek",
+    "Xul", "Yaxkʼin", "Mol", "Chʼen", "Yax",
+    "Sakʼ", "Keh", "Mak", "Kʼankʼin", "Muwan",
+    "Pax", "Kʼayabʼ", "Kumkʼu", "Wayeb'"
+]
+
 class MayanDate(PolyDate):
     # maintians long count,
     # Tzolkʼin and Haabʼ
@@ -12,10 +26,14 @@ class MayanDate(PolyDate):
                 # MayanDate number
                 self._n = args[0]
                 self._set_counts()
+                self._set_tzolkin()
+                self._set_haab()
                 return
             if isinstance(args[0],PolyDate):
                 self._n = args[0].universal()._n + 1136777
                 self._set_counts()
+                self._set_tzolkin()
+                self._set_haab()
                 return
             raise ValueError("MayanDate can only be constructed from integers or PolyDate instances")
         elif len(args) == 5:
@@ -30,6 +48,8 @@ class MayanDate(PolyDate):
             self._winal = args[3]
             self._kin = args[4]
             self._set_n()
+            self._set_tzolkin()
+            self._set_haab()
             return
         raise ValueError("MayanDate constructor was expecting either 1 or 5 arguments")
     lower_bound = UniversalDate(-1136777)
@@ -43,8 +63,21 @@ class MayanDate(PolyDate):
         long += str(self._katun) + "." + str(self._tun) + "."
         long += str(self._winal) + "." + str(self._kin) + ")"
         return long
+    def tzolkin(self):
+        tz = "Tzolkʼin("
+        tz += str(self._tzolkin_number) + " "
+        tz +=  self._tzolkin_day + ")"
+        return tz
+    def haab(self):
+        h = "Haabʼ("
+        h += str(self._haab_number) + " "
+        h += self._haab_month + ")"
+        return h
     def __str__(self):
-        total = "MayanDate(" + self.long_count() + ")"
+        total = "MayanDate(" + self.long_count()
+        total += "," + self.haab()
+        total += "," + self.tzolkin()
+        total += ")"
         return total
     def _addition(self,num):
         # num must be an integer
@@ -62,6 +95,14 @@ class MayanDate(PolyDate):
         return self._winal
     def kin(self):
         return self._kin
+    def tzolkin_number():
+        return self._tzolkin_number
+    def tzolkin_day():
+        return self._tzolkin_day
+    def haab_number():
+        return self._haab_number
+    def haab_month():
+        return self._haab_month
     @staticmethod
     def validate_long_count(baktun,katun,tun,winal,kin):
         if baktun > 19:
@@ -99,3 +140,10 @@ class MayanDate(PolyDate):
             self._baktun, self._katun, self._tun,
             self._winal, self._kin
         )
+    def _set_tzolkin(self):
+        self._tzolkin_number = (self._n + 3) % 13 + 1
+        self._tzolkin_day = tzolkin_days[(self._n + 19) % 20]
+    def _set_haab(self):
+        t = (self._n + 348) % 365
+        self._haab_number = t % 20
+        self._haab_month = haab_months[t // 20]

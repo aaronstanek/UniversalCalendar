@@ -31,3 +31,8 @@ It has the methods:
 - tzolkin_day (returns the name of the day as a string, first letter capitalized, appostrophes where appropriate)
 - haab_number (returns the number of the day within the Haabʼ month, 0 to 19)
 - haab_month (returns the name of the Haabʼ month, first letter capitalized, appostrophes where appropriate)
+
+Correlation with Gregorian Calendar established by:
+- https://en.wikipedia.org/wiki/Maya_calendar
+- https://en.wikipedia.org/wiki/Mesoamerican_Long_Count_calendar
+- https://maya.nmai.si.edu/calendar/maya-calendar-converter

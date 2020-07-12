@@ -10,3 +10,7 @@ an exact correlation between it and most other calendar systems (which typically
 This implementation attaches the Julian Day to the GregorianDate which began 12 hours before it (UTC)
 
 So, Gregorian 21 Dec 2012 CE corresponds to Julian Day 2,456,283
+
+Correlation with Gregorian Calendar established by:
+- https://en.wikipedia.org/wiki/Julian_day
+- https://en.wikipedia.org/wiki/Mesoamerican_Long_Count_calendar

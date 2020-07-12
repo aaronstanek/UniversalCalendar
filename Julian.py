@@ -33,7 +33,7 @@ class JulianDate(PolyDate):
     # this calendar is proleptic, as falls out
     # of sync with the actual Julian Calendar on dates
     # before 8 AD
-    def __init__(self,*args):
+    def __init__(self,*args,**kwargs):
         # args may have one of three forms
         # [int] -> the value of _n
         # [int,int,int] -> the year, month, day (checked for correctness)
@@ -53,6 +53,10 @@ class JulianDate(PolyDate):
             for i in range(3):
                 if type(args[i]) != int:
                     raise TypeError("JulianDate constructor was expecting [integer,integer,integer]")
+            args = list(args)
+            if "numbering" in kwargs:
+                if kwargs["numbering"] == "berber":
+                    args[0] = self._convert_berber(args[0])
             JulianDate.validate(*args)
             self._year = args[0]
             self._month = args[1]
@@ -142,3 +146,24 @@ class JulianDate(PolyDate):
         self._year = year
         self._month = month_in_year + 1
         self._day = n_in_month + 1
+    # alternative numberings
+    def year_berber(self):
+        # Berber count is 950 years ahead of Anno Domini
+        y = self._year
+        if y <= -1:
+            y += 1
+        y += 950
+        if y <= 0:
+            y -= 1
+        return y
+    def berber(self):
+        return "BerberDate(" + str(self.year_berber()) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _convert_berber(self,year):
+        if year == 0:
+            raise ValueError("The Berber Calendar does not have a year 0, use -1 instead")
+        if year <= -1:
+            year += 1
+        year -= 950
+        if year <= 0:
+            year -= 1
+        return year

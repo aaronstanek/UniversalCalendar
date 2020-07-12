@@ -25,3 +25,6 @@ day of the week.
 
 Correlation with Gregorian Calendar established by:
 - https://en.wikipedia.org/wiki/Julian_calendar
+
+Alternative numberings
+- berber

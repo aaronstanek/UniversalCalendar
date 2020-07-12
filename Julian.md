@@ -29,3 +29,6 @@ Correlation with Gregorian Calendar established by:
 Alternative numberings
 - berber (counts from 950 BC)
 - byzantine (counts from 5509 BC) (new year starts on 1 Sep)
+- year starting on March 1 (march1)
+- year starting on March 25 (march25)
+- year starting on December 25 (december25)

@@ -59,6 +59,12 @@ class JulianDate(PolyDate):
                     args[0] = self._convert_berber(args[0])
                 elif kwargs["numbering"] == "byzantine":
                     args[0] = self._convert_byzantine(args[0],args[1])
+                elif kwargs["numbering"] == "march1":
+                    args[0] = self._convert_march1(args[0],args[1])
+                elif kwargs["numbering"] == "march25":
+                    args[0] = self._convert_march25(*args)
+                elif kwargs["numbering"] == "december25":
+                    args[0] = self._convert_december25(*args)
                 else:
                     raise ValueError("Invalid numbering")
             JulianDate.validate(*args)
@@ -201,6 +207,85 @@ class JulianDate(PolyDate):
         else:
             # (Sep-Dec)
             year -= 5509
+        if year <= 0:
+            year -= 1
+        return year
+    def year_march1(self):
+        # starting the year on March 1
+        # year is the same (Mar-Dec)
+        # year is one less (Jan-Mar)
+        y = self._year
+        if y <= -1:
+            y += 1
+        if self._month < 3:
+            y -= 1
+        if y <= 0:
+            y -= 1
+        return y
+    def march1(self):
+        return "JulianDate(Mar1)(" + str(self.year_march1()) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _convert_march1(self,year,month):
+        if year == 0:
+            raise ValueError("The Julian Calendar does not have a year 0, use -1 instead")
+        if year <= -1:
+            year += 1
+        if month < 3:
+            year += 1
+        if year <= 0:
+            year -= 1
+        return year
+    def year_march25(self):
+        # starting the year on March 25
+        # year is the same (Mar25-Dec)
+        # year is one less (Jan-Mar24)
+        y = self._year
+        if y <= -1:
+            y += 1
+        if self._month <= 2:
+            y -= 1
+        elif self._month == 3 and self._day <= 24:
+            y -= 1
+        if y <= 0:
+            y -= 1
+        return y
+    def march25(self):
+        return "JulianDate(Mar25)(" + str(self.year_march25()) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _convert_march25(self,year,month,day):
+        if year == 0:
+            raise ValueError("The Julian Calendar does not have a year 0, use -1 instead")
+        if year <= -1:
+            year += 1
+        if month <= 2:
+            year += 1
+        elif month == 3 and day <= 24:
+            year += 1
+        if year <= 0:
+            year -= 1
+        return year
+    def year_december25(self):
+        # starting the year on December 25
+        # year is the same (Jan-Dec24)
+        # year is one more (Dec25-Dec31)
+        y = self._year
+        if y <= -1:
+            y += 1
+        if self._month == 12 and self._day >= 25:
+            y += 1
+        if y <= 0:
+            y -= 1
+        return y
+    def december25(self):
+        return "JulianDate(Dec25)(" + str(self.year_december25()) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _convert_december25(self,year,month,day):
+        if year == 0:
+            raise ValueError("The Julian Calendar does not have a year 0, use -1 instead")
+        if month != 12:
+            return year
+        if day < 25:
+            return year
+        if year <= -1:
+            year += 1
+        year -= 1
         if year <= 0:
             year -= 1
         return year

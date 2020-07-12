@@ -27,4 +27,5 @@ Correlation with Gregorian Calendar established by:
 - https://en.wikipedia.org/wiki/Julian_calendar
 
 Alternative numberings
-- berber
+- berber (counts from 950 BC)
+- byzantine (counts from 5509 BC) (new year starts on 1 Sep)

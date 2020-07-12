@@ -57,6 +57,10 @@ class JulianDate(PolyDate):
             if "numbering" in kwargs:
                 if kwargs["numbering"] == "berber":
                     args[0] = self._convert_berber(args[0])
+                elif kwargs["numbering"] == "byzantine":
+                    args[0] = self._convert_byzantine(args[0],args[1])
+                else:
+                    raise ValueError("Invalid numbering")
             JulianDate.validate(*args)
             self._year = args[0]
             self._month = args[1]
@@ -164,6 +168,39 @@ class JulianDate(PolyDate):
         if year <= -1:
             year += 1
         year -= 950
+        if year <= 0:
+            year -= 1
+        return year
+    def year_byzantine(self):
+        # Byzantine count is 5,508 years ahead of Anno Domini (Jan-Aug)
+        # 5,508 years ahead (Sep-Dec)
+        y = self._year
+        if y <= -1:
+            y += 1
+        if self._month < 9:
+            # (Jan-Aug)
+            y += 5508
+        else:
+            # (Sep-Dec)
+            y += 5509
+        if y <= 0:
+            y -= 1
+        return y
+    def byzantine(self):
+        return "ByzantineDate(" + str(self.year_byzantine()) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _convert_byzantine(self,year,month):
+        if year == 0:
+            raise ValueError("The Byzantine Calendar does not have a year 0, use -1 instead")
+        if month < 1 or month > 12:
+            raise ValueError("JulianDate month must be between 1 and 12")
+        if year <= -1:
+            year += 1
+        if month < 9:
+            # (Jan-Aug)
+            year -= 5508
+        else:
+            # (Sep-Dec)
+            year -= 5509
         if year <= 0:
             year -= 1
         return year

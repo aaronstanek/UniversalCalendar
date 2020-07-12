@@ -1,4 +1,6 @@
-# JulianDate encodes the proleptic Julian Calendar
+# JulianDate
+
+JulianDate encodes the proleptic Julian Calendar
 
 Its constructor arguments are year, month, day
 

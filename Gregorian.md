@@ -1,4 +1,6 @@
-# GregorianDate encodes the proleptic Gregorian Calendar
+# GregorianDate
+
+GregorianDate encodes the proleptic Gregorian Calendar
 
 Its constructor arguments are year, month, day
 

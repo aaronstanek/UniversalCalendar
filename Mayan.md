@@ -1,4 +1,6 @@
-# MayanDate encodes the Mayan Calendar
+# MayanDate
+
+MayanDate encodes the Mayan Calendar
 
 Its constructor arguments are the date in the long count calendar: bʼakʼtun, k'atun, tun, winal, k'in
 
@@ -8,17 +10,11 @@ which runs from 0 to 17
 Although dates after 19.19.19.17.19 are valid in the actual
 Mayan Calendar, they are invalid in this implementation.
 
-In the actual Mayan Calendar, dates 1.0.0.0.0 to 12.19.19.17.19
-are ambiguous. They can refer to the present creation, or to the previous creation.
-In this implementation, they refer only to the present creation.
-(Gregorian 13 Nov 2720 BCE to 20 Dec 2012 CE)
-
-In the actual Mayan Calendar, dates 13.0.0.0.0 to 13.19.19.17.19
-are ambiguous. They can refer to either to the bʼakʼtun at the beginning of the
-present creation, or to the bʼakʼtun starting 13 bʼakʼtuns after the start of the
-present creation. To avoid this confusion, in this implementation, 13.0.0.0.0 to 13.19.19.17.19 refer to
-the latter (starting Gregorian 21 Dec 2012 CE). The former (starting Gregorian 11 August 3114 BCE)
-is renumbered 0.0.0.0.0 to 0.19.19.17.19
+Traditionally, Gregorian dates 11 Aug 3114 BCE to 12 Nov 2720 BCE are represented
+by Mayan dates 13.0.0.0.0 to 13.19.19.17.19. However, this leads to ambiguity
+as Gregorian dates 21 Dec 2012 CE to 25 Mar 2407 CE are also represented
+by the same Mayan date range. To avoid this ambiguity, in this implementation,
+the former range is renumbered 0.0.0.0.0 to 0.19.19.17.19.
 
 It also displays Tzolkʼin and Haab' in standard notaiton.
 

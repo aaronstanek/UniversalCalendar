@@ -1,4 +1,6 @@
-# JulianDay encodes the Julian Day
+# JulianDay
+
+JulianDay encodes the Julian Day
 
 Its constructor argument is the Julian Day number
 

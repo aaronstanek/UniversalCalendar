@@ -97,7 +97,7 @@ class IslamicDate(PolyDate):
     def day_of_week(self):
         return day_names[self._n % 7]
     def day_of_week_arabic(self):
-        return day_names_native[self._n % 7]
+        return day_names_arabic[self._n % 7]
     leap_years = [2, 5, 7, 10, 13, 15, 18, 21, 24, 26, 29]
     @staticmethod
     def is_leap_year(year):

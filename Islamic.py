@@ -2,32 +2,48 @@ from .PolyDate import PolyDate
 from .Universal import UniversalDate
 from .DurationSum import DurationSum
 
-month_lengths = [
+month_lengths = DurationSum([
     30, 29, 30, 29,
     30, 29, 30, 29,
     30, 29, 30, 29
-]
+])
 
-month_lengths_leap = [
+month_lengths_leap = DurationSum([
     30, 29, 30, 29,
     30, 29, 30, 29,
     30, 29, 30, 30
-]
+])
 
 # leap years are those mod 30
 # 2, 5, 7, 10, 13, 15, 18, 21, 24, 26, 29
 
-year_length = [
+year_length = DurationSum([
     354, 354, 355, 354, 354,
     355, 354, 355, 354, 354,
     355, 354, 354, 355, 354,
     355, 354, 354, 355, 354,
     354, 355, 354, 354, 355,
     354, 355, 354, 354, 355
-    ]
+    ])
+
+day_names = [
+    "Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"
+]
+
+day_names_arabic = [
+    "ٱلْأَحَد",
+    "ٱلْإِثْنَيْن",
+    "ٱلثُّلَاثَاء",
+    "ٱلْأَرْبِعَاء",
+    "ٱلْخَمِيس",
+    "ٱلْجُمْعَة",
+    "ٱلسَّبْت"
+]
 
 class IslamicDate(PolyDate):
     # _n is the IslamicDate number
+    # it is universal - 227025
     # _year is years in the Islamic Calendar
     # there is no year zero
     # _month is the month (1 to 12)
@@ -43,7 +59,7 @@ class IslamicDate(PolyDate):
                 self._set_ymd()
                 return
             if isinstance(args[0],PolyDate):
-                self._n = args[0].universal()._n
+                self._n = args[0].universal()._n - 227025
                 self._set_ymd()
                 return
             raise ValueError("IslamicDate can only be constructed from integers or PolyDate instances")
@@ -60,6 +76,28 @@ class IslamicDate(PolyDate):
         raise ValueError("IslamicDate constructor was expecting either 1 or 3 arguments")
     lower_bound = None
     upper_bound = None
+    def universal(self):
+        return UniversalDate(self._n + 227025)
+    def number(self):
+        return self._n
+    def __str__(self):
+        return "IslamicDate(" + str(self._year) + "," + str(self._month) + "," + str(self._day) + ")"
+    def _addition(self,num):
+        # num must be an integer
+        return IslamicDate(self._n + num)
+    def _subtract_int(self,num):
+        # num must be an integer
+        return IslamicDate(self._n - num)
+    def year(self):
+        return self._year
+    def month(self):
+        return self._month
+    def day(self):
+        return self._day
+    def day_of_week(self):
+        return day_names[self._n % 7]
+    def day_of_week_arabic(self):
+        return day_names_native[self._n % 7]
     leap_years = [2, 5, 7, 10, 13, 15, 18, 21, 24, 26, 29]
     @staticmethod
     def is_leap_year(year):
@@ -91,7 +129,7 @@ class IslamicDate(PolyDate):
         if y <= -1:
             y += 1
         year_in_block = y % 30
-        year_block = (y - year_block) // 30
+        year_block = (y - year_in_block) // 30
         # start setting the total
         total = year_block * 10631
         total += year_length.forward(year_in_block)

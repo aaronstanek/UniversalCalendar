@@ -64,6 +64,8 @@ class GregorianDate(PolyDate):
                     raise TypeError("GregorianDate numbering must be a string")
                 if numbering == "default":
                     pass
+                elif numbering == "holocene":
+                    args[0] = self._convert_holocene(args[0])
                 else:
                     raise ValueError("Invalid numbering")
             GregorianDate.validate(*args)
@@ -202,3 +204,19 @@ class GregorianDate(PolyDate):
         self._year = year
         self._month = month + 1
         self._day = n_in_month + 1
+    # alternative numberings
+    def year_holocene(self):
+        # Holocene count is 10,000 years ahead of Anno Domini
+        # and Holocene has a year zero
+        if self._year > 0:
+            return self._year + 10000
+        else:
+            return self._year + 10001
+    def holocene(self):
+        return "HoloceneDate(" + str(self.year_holocene()) + "," + str(self._month) + "," + str(self._day) + ")"
+    @staticmethod
+    def _convert_holocene(year):
+        year -= 10000
+        if year <= 0:
+            year -= 1
+        return year

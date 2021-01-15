@@ -55,15 +55,18 @@ class JulianDate(PolyDate):
                     raise TypeError("JulianDate constructor was expecting [integer,integer,integer]")
             args = list(args)
             if "numbering" in kwargs:
-                if kwargs["numbering"] == "berber":
+                numbering = kwargs["numbering"]
+                if type(numbering) != str:
+                    raise TypeError("JulianDate numbering must be a string")
+                if numbering == "berber":
                     args[0] = self._convert_berber(args[0])
-                elif kwargs["numbering"] == "byzantine":
+                elif numbering == "byzantine":
                     args[0] = self._convert_byzantine(args[0],args[1])
-                elif kwargs["numbering"] == "march1":
+                elif numbering == "march1":
                     args[0] = self._convert_march1(args[0],args[1])
-                elif kwargs["numbering"] == "march25":
+                elif numbering == "march25":
                     args[0] = self._convert_march25(*args)
-                elif kwargs["numbering"] == "december25":
+                elif numbering == "december25":
                     args[0] = self._convert_december25(*args)
                 else:
                     raise ValueError("Invalid numbering")

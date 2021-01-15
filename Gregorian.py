@@ -65,13 +65,13 @@ class GregorianDate(PolyDate):
                 if numbering == "default":
                     pass
                 elif numbering == "era_fascista":
-                    args[0] = self._convert_era_fascista(*args)
+                    args[0] = GregorianDate._convert_era_fascista(*args)
                 elif numbering == "juche":
-                    args[0] = self._convert_epoch_1912(args[0],"Juche")
+                    args[0] = GregorianDate._convert_epoch_1912(args[0],"Juche")
                 elif numbering == "holocene":
-                    args[0] = self._convert_holocene(args[0])
+                    args[0] = GregorianDate._convert_holocene(args[0])
                 elif numbering == "minguo":
-                    args[0] = self._convert_epoch_1912(args[0],"Minguo")
+                    args[0] = GregorianDate._convert_epoch_1912(args[0],"Minguo")
                 else:
                     raise ValueError("Invalid numbering")
             GregorianDate.validate(*args)

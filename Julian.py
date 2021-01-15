@@ -61,15 +61,15 @@ class JulianDate(PolyDate):
                 if numbering == "default":
                     pass
                 elif numbering == "berber":
-                    args[0] = self._convert_berber(args[0])
+                    args[0] = JulianDate._convert_berber(args[0])
                 elif numbering == "byzantine":
-                    args[0] = self._convert_byzantine(args[0],args[1])
+                    args[0] = JulianDate._convert_byzantine(args[0],args[1])
                 elif numbering == "march1":
-                    args[0] = self._convert_march1(args[0],args[1])
+                    args[0] = JulianDate._convert_march1(args[0],args[1])
                 elif numbering == "march25":
-                    args[0] = self._convert_march25(*args)
+                    args[0] = JulianDate._convert_march25(*args)
                 elif numbering == "december25":
-                    args[0] = self._convert_december25(*args)
+                    args[0] = JulianDate._convert_december25(*args)
                 else:
                     raise ValueError("Invalid numbering")
             JulianDate.validate(*args)

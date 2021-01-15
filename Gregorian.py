@@ -38,7 +38,7 @@ class GregorianDate(PolyDate):
     # it ranges 1 to 12
     # _day is an int holding the day number
     # it ranges 1 to 31
-    def __init__(self,*args):
+    def __init__(self,*args,**kwargs):
         # args may have one of three forms
         # [int] -> the value of _n
         # [int,int,int] -> the year, month, day (checked for correctness)
@@ -57,6 +57,15 @@ class GregorianDate(PolyDate):
             for i in range(3):
                 if type(args[i]) != int:
                     raise TypeError("GregorianDate constructor was expecting [integer,integer,integer]")
+            args = list(args)
+            if "numbering" in kwargs:
+                numbering = kwargs["numbering"]
+                if type(numbering) != str:
+                    raise TypeError("GregorianDate numbering must be a string")
+                if numbering == "default":
+                    pass
+                else:
+                    raise ValueError("Invalid numbering")
             GregorianDate.validate(*args)
             self._year = args[0]
             self._month = args[1]

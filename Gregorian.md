@@ -22,3 +22,7 @@ The first three return the internal state of the object.
 
 The last returns a string with the common English name of the
 day of the week.
+
+Numberings
+- default
+- holocene (counts from 10001 BCE)

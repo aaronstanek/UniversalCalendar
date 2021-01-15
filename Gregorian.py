@@ -64,8 +64,12 @@ class GregorianDate(PolyDate):
                     raise TypeError("GregorianDate numbering must be a string")
                 if numbering == "default":
                     pass
+                elif numbering == "juche":
+                    args[0] = self._convert_epoch_1912(args[0],"Juche")
                 elif numbering == "holocene":
                     args[0] = self._convert_holocene(args[0])
+                elif numbering == "minguo":
+                    args[0] = self._convert_epoch_1912(args[0],"Minguo")
                 else:
                     raise ValueError("Invalid numbering")
             GregorianDate.validate(*args)
@@ -205,6 +209,30 @@ class GregorianDate(PolyDate):
         self._month = month + 1
         self._day = n_in_month + 1
     # alternative numberings
+    def _year_epoch_1912(self):
+        y = self._year
+        if y <= -1:
+            y += 1
+        y -= 1911
+        if y <= 0:
+            y -= 1
+        return y
+    year_juche = _year_epoch_1912
+    year_minguo = _year_epoch_1912
+    def juche(self):
+        return "JucheDate(" + str(self.year_juche()) + "," + str(self._month) + "," + str(self._day) + ")"
+    def minguo(self):
+        return "MinguoDate(" + str(self.year_minguo()) + "," + str(self._month) + "," + str(self._day) + ")"
+    @staticmethod
+    def _convert_epoch_1912(year,name):
+        if year == 0:
+            raise ValueError("The " + name + " Calendar does not have a year 0, use -1 instead")
+        if year <= -1:
+            year += 1
+        year += 1911
+        if year <= 0:
+            year -= 1
+        return year
     def year_holocene(self):
         # Holocene count is 10,000 years ahead of Anno Domini
         # and Holocene has a year zero

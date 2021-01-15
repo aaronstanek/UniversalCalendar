@@ -25,4 +25,6 @@ day of the week.
 
 Numberings
 - default
+- juche (counts from 1912)
 - holocene (counts from 10001 BCE)
+- minguo (counts from 1912)

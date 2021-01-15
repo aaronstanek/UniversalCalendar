@@ -58,7 +58,9 @@ class JulianDate(PolyDate):
                 numbering = kwargs["numbering"]
                 if type(numbering) != str:
                     raise TypeError("JulianDate numbering must be a string")
-                if numbering == "berber":
+                if numbering == "default":
+                    pass
+                elif numbering == "berber":
                     args[0] = self._convert_berber(args[0])
                 elif numbering == "byzantine":
                     args[0] = self._convert_byzantine(args[0],args[1])

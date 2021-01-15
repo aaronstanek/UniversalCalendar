@@ -173,7 +173,8 @@ class JulianDate(PolyDate):
         return y
     def berber(self):
         return "BerberDate(" + str(self.year_berber()) + "," + str(self._month) + "," + str(self._day) + ")"
-    def _convert_berber(self,year):
+    @staticmethod
+    def _convert_berber(year):
         if year == 0:
             raise ValueError("The Berber Calendar does not have a year 0, use -1 instead")
         if year <= -1:
@@ -199,7 +200,8 @@ class JulianDate(PolyDate):
         return y
     def byzantine(self):
         return "ByzantineDate(" + str(self.year_byzantine()) + "," + str(self._month) + "," + str(self._day) + ")"
-    def _convert_byzantine(self,year,month):
+    @staticmethod
+    def _convert_byzantine(year,month):
         if year == 0:
             raise ValueError("The Byzantine Calendar does not have a year 0, use -1 instead")
         if month < 1 or month > 12:
@@ -229,7 +231,8 @@ class JulianDate(PolyDate):
         return y
     def march1(self):
         return "JulianDate(Mar1)(" + str(self.year_march1()) + "," + str(self._month) + "," + str(self._day) + ")"
-    def _convert_march1(self,year,month):
+    @staticmethod
+    def _convert_march1(year,month):
         if year == 0:
             raise ValueError("The Julian Calendar does not have a year 0, use -1 instead")
         if year <= -1:
@@ -255,7 +258,8 @@ class JulianDate(PolyDate):
         return y
     def march25(self):
         return "JulianDate(Mar25)(" + str(self.year_march25()) + "," + str(self._month) + "," + str(self._day) + ")"
-    def _convert_march25(self,year,month,day):
+    @staticmethod
+    def _convert_march25(year,month,day):
         if year == 0:
             raise ValueError("The Julian Calendar does not have a year 0, use -1 instead")
         if year <= -1:
@@ -281,7 +285,8 @@ class JulianDate(PolyDate):
         return y
     def december25(self):
         return "JulianDate(Dec25)(" + str(self.year_december25()) + "," + str(self._month) + "," + str(self._day) + ")"
-    def _convert_december25(self,year,month,day):
+    @staticmethod
+    def _convert_december25(year,month,day):
         if year == 0:
             raise ValueError("The Julian Calendar does not have a year 0, use -1 instead")
         if month != 12:

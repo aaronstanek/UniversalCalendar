@@ -64,6 +64,8 @@ class GregorianDate(PolyDate):
                     raise TypeError("GregorianDate numbering must be a string")
                 if numbering == "default":
                     pass
+                elif numbering == "era_fascista":
+                    args[0] = self._convert_era_fascista(*args)
                 elif numbering == "juche":
                     args[0] = self._convert_epoch_1912(args[0],"Juche")
                 elif numbering == "holocene":
@@ -230,6 +232,39 @@ class GregorianDate(PolyDate):
         if year <= -1:
             year += 1
         year += 1911
+        if year <= 0:
+            year -= 1
+        return year
+    def year_era_fascista(self):
+        # Epoch is October 28, 1922
+        # October 28 to December 31, off by 1921
+        # January 1 to October 27, off by 1922
+        y = self._year
+        if y <= -1:
+            y += 1
+        y -= 1922
+        if self._month >= 10:
+            if self._month > 10:
+                y += 1
+            elif self._day >= 28:
+                y += 1
+        if y <= 0:
+            y -= 1
+        return y
+    def era_fascista(self):
+        return "EraFascista(" + str(self.year_era_fascista()) + "," + str(self._month) + "," + str(self._day) + ")"
+    @staticmethod
+    def _convert_era_fascista(year,month,day):
+        if year == 0:
+            raise ValueError("Era Fascista does not have a year 0, use -1 instead")
+        if year <= -1:
+            year += 1
+        if month >= 10:
+            if month > 10:
+                year -= 1
+            elif day >= 28:
+                year -= 1
+        year += 1922
         if year <= 0:
             year -= 1
         return year

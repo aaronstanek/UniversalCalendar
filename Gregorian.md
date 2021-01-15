@@ -25,6 +25,7 @@ day of the week.
 
 Numberings
 - default
+- era_fascista (counts from 1922) (new year starts on 28 Oct)
 - juche (counts from 1912)
 - holocene (counts from 10001 BCE)
 - minguo (counts from 1912)

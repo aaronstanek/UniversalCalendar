@@ -58,6 +58,8 @@ class AlexandrianDate(PolyDate):
                     raise TypeError("AlexandrianDate numbering must be a string")
                 if numbering == "coptic":
                     pass
+                elif numbering == "ethiopian":
+                    args[0] = AlexandrianDate._convert_ethiopian(args[0])
                 else:
                     raise ValueError("Invalid numbering")
             else:
@@ -162,3 +164,13 @@ class AlexandrianDate(PolyDate):
         return y
     def ethiopian(self):
         return "EthiopianDate(" + str(self.year_ethiopian()) + "," + str(self._month) + "," + str(self._day) + ")"
+    @staticmethod
+    def _convert_ethiopian(year):
+        if year == 0:
+            raise ValueError("The Ethiopian Calendar does not have a year 0, use -1 instead")
+        if year <= -1:
+            year += 1
+        year -= 276
+        if year <= 0:
+            year -= 1
+        return year

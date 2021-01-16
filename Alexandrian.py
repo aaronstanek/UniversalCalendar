@@ -76,13 +76,17 @@ class AlexandrianDate(PolyDate):
     def number(self):
         return self._n
     def __str__(self):
-        return "AlexandrianDate(" + str(self._year) + "," + str(self._month) + "," + str(self._day) + ")"
+        return "AlexandrianDate(" + str(self._year) + "/" + str(self.year_ethiopian()) + "," + str(self._month) + "," + str(self._day) + ")"
     def _addition(self,num):
         # num must be an integer
         return AlexandrianDate(self._n + num)
     def _subtract_int(self,num):
         # num must be an integer
         return AlexandrianDate(self._n - num)
+    def month(self):
+        return self._month
+    def day(self):
+        return self._day
     @staticmethod
     def is_leap_year(year):
         # year should be an integer
@@ -143,3 +147,18 @@ class AlexandrianDate(PolyDate):
         self._year = year
         self._month = month_in_year + 1
         self._day = n_in_month + 1
+    # alternative numberings
+    def year_coptic(self):
+        return self._year
+    def coptic(self):
+        return "CopticDate(" + str(self._year) + "," + str(self._month) + "," + str(self._day) + ")"
+    def year_ethiopian(self):
+        y = self._year
+        if y <= -1:
+            y += 1
+        y += 276
+        if y <= 0:
+            y -= 1
+        return y
+    def ethiopian(self):
+        return "EthiopianDate(" + str(self.year_ethiopian()) + "," + str(self._month) + "," + str(self._day) + ")"

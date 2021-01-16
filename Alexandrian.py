@@ -18,6 +18,11 @@ block_length = DurationSum([
     365, 365, 365, 366
 ])
 
+day_names = [
+    "Thursday", "Friday", "Saturday", "Sunday",
+    "Monday", "Tuesday", "Wednesday"
+]
+
 class AlexandrianDate(PolyDate):
     # _n is the Alexandrian date number
     # this is universal - 103605
@@ -89,6 +94,8 @@ class AlexandrianDate(PolyDate):
         return self._month
     def day(self):
         return self._day
+    def day_of_week(self):
+        return day_names[self._n % 7]
     @staticmethod
     def is_leap_year(year):
         # year should be an integer

@@ -2,22 +2,22 @@ from .PolyDate import PolyDate
 from .Universal import UniversalDate
 
 tzolkin_days = [
-    "Imix", "Ikʼ", "Akʼbʼal", "Kʼan", "Chikchan",
-    "Kimi", "Manikʼ", "Lamat", "Muluk", "Ok",
-    "Chuwen", "Ebʼ", "Bʼen", "Ix", "Men",
-    "Kibʼ", "Kabʼan", "Etzʼnabʼ", "Kawak", "Ajaw"
+    "Imix", "Ik'", "Ak'b'al", "K'an", "Chikchan",
+    "Kimi", "Manik'", "Lamat", "Muluk", "Ok",
+    "Chuwen", "Eb'", "B'en", "Ix", "Men",
+    "Kib'", "Kab'an", "Etz'nab'", "Kawak", "Ajaw"
 ]
 
 haab_months = [
-    "Pop", "Woʼ", "Sip", "Sotzʼ", "Sek",
-    "Xul", "Yaxkʼin", "Mol", "Chʼen", "Yax",
-    "Sakʼ", "Keh", "Mak", "Kʼankʼin", "Muwan",
-    "Pax", "Kʼayabʼ", "Kumkʼu", "Wayeb'"
+    "Pop", "Wo'", "Sip", "Sotz'", "Sek",
+    "Xul", "Yaxk'in", "Mol", "Ch'en", "Yax",
+    "Sak'", "Keh", "Mak", "K'ank'in", "Muwan",
+    "Pax", "K'ayab'", "Kumk'u", "Wayeb'"
 ]
 
 class MayanDate(PolyDate):
     # maintians long count,
-    # Tzolkʼin and Haabʼ
+    # Tzolk'in and Haab'
     # epoch aligns to the start of the long count
     # _n is universal + 1136777
     def __init__(self,*args):
@@ -64,12 +64,12 @@ class MayanDate(PolyDate):
         long += str(self._winal) + "." + str(self._kin) + ")"
         return long
     def tzolkin(self):
-        tz = "Tzolkʼin("
+        tz = "Tzolk'in("
         tz += str(self._tzolkin_number) + " "
         tz +=  self._tzolkin_day + ")"
         return tz
     def haab(self):
-        h = "Haabʼ("
+        h = "Haab'("
         h += str(self._haab_number) + " "
         h += self._haab_month + ")"
         return h

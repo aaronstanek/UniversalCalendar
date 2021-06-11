@@ -2,17 +2,29 @@ class PolyDate(object):
     def __init__(self,*args,**kwargs):
         raise Exception("Creating an instance of the base class PolyDate is forbidden")
     def __lt__(self,other):
-        return self.universal()._n < other.universal()._n
+        if isinstance(other,PolyDate):
+            return self.universal()._n < other.universal()._n
+        raise TypeError("PolyDate.__lt__ can only be called with a PolyDate instance")
     def __gt__(self,other):
-        return self.universal()._n > other.universal()._n
+        if isinstance(other,PolyDate):
+            return self.universal()._n > other.universal()._n
+        raise TypeError("PolyDate.__gt__ can only be called with a PolyDate instance")
     def __le__(self,other):
-        return self.universal()._n <= other.universal()._n
+        if isinstance(other,PolyDate):
+            return self.universal()._n <= other.universal()._n
+        raise TypeError("PolyDate.__le__ can only be called with a PolyDate instance")
     def __ge__(self,other):
-        return self.universal()._n >= other.universal()._n
+        if isinstance(other,PolyDate):
+            return self.universal()._n >= other.universal()._n
+        raise TypeError("PolyDate.__ge__ can only be called with a PolyDate instance")
     def __eq__(self,other):
-        return self.universal()._n == other.universal()._n
+        if isinstance(other,PolyDate):
+            return self.universal()._n == other.universal()._n
+        raise TypeError("PolyDate.__eq__ can only be called with a PolyDate instance")
     def __ne__(self,other):
-        return self.universal()._n != other.universal()._n
+        if isinstance(other,PolyDate):
+            return self.universal()._n != other.universal()._n
+        raise TypeError("PolyDate.__ne__ can only be called with a PolyDate instance")
     def __add__(self,num):
         if type(num) == int:
             return self._addition(num)
